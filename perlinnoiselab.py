@@ -1,9 +1,9 @@
 import glib
-def noisemaker3000 (x,y,freq,octaves):
+def intensity (x,y,freq,octaves):
     from noise import pnoise2
     value = pnoise2(x/freq, y/freq, octaves)
     return value
-def powerswitch (bottom, top, value):
+def decibel (bottom, top, value):
     a = (top-bottom)/2
     newvalue = (a*value)+(bottom+a)
     return newvalue
@@ -12,8 +12,8 @@ def cacophony(x,y,freq,octaves):
     for i in range ( 0 , y):
         noises.append([])
         for j in range (0 , x):
-            kekr = powerswitch ( 0 , 255 , noisemaker3000 (i , j , freq , octaves))
-            noises[i].append([kekr])
+            note = decibel ( 0 , 255 , intensity (i , j , freq , octaves))
+            noises[i].append([note])
     return noises
 def remix (base , modifier):
     product = []
